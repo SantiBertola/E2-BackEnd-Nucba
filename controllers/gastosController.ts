@@ -15,13 +15,13 @@ export const createGasto = async (req: Request, res: Response ) => {
         return
     }
 
-    const userInDB = await User.findOne({name: User})
+    // const userInDB = await User.findOne({name: User})
 
-    if(!userInDB) {
-        res.json({
-            msj: "Without a user, no expense will be recorded"
-        })
-    }
+    // if(!userInDB) {
+    //     res.json({
+    //         msj: "Without a user, no expense will be recorded"
+    //     })
+    // }
 
     const gasto = new Gastos(gastosData)
 

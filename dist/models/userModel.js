@@ -15,7 +15,7 @@ const UserSchema = new mongoose_1.Schema({
         required: true,
         unique: true,
     },
-    expenses: {
+    gasto: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "Gastos",
         required: true,

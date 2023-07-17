@@ -1,11 +1,35 @@
 import { Request, Response } from "express";
 
 import User, { IUser } from "../models/userModel";
+import Gastos from "../models/gastosModel";
 
 export const createUser = async (req: Request, res: Response) => {
   const userData: IUser = req.body;
 
-  const user = new User(userData);
+  const { name, lastName, dni, gasto } = userData;
+
+  if (!dni || !name || !lastName || !gasto) {
+    res.json({
+      msj: "Required data is missing from the request",
+    });
+    return;
+  }
+  const gastoData = await Gastos.findOne({ expense: gasto });
+
+  const userInDB = await User.findOne({ dni: dni });
+
+  if (userInDB) {
+    res.json({
+      msj: "This user is already register",
+    });
+  }
+
+  const user = new User({
+    name,
+    lastName,
+    dni,
+    gasto: gastoData?._id,
+  });
 
   await user.save();
 

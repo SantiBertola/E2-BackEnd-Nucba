@@ -4,7 +4,7 @@ export interface IUser {
   name: string;
   lastName: string;
   dni: number;
-  expenses: ObjectId;
+  gasto: ObjectId;
   state: boolean;
 }
 
@@ -22,7 +22,7 @@ const UserSchema = new Schema<IUser>({
     required: true,
     unique: true,
   },
-  expenses: {
+  gasto: {
     type: Schema.Types.ObjectId,
     ref: "Gastos",
     required: true,

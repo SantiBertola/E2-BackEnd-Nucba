@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createGasto = void 0;
 const gastosModel_1 = __importDefault(require("../models/gastosModel"));
-const userModel_1 = __importDefault(require("../models/userModel"));
 const createGasto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const gastosData = req.body;
     const { expense, detail } = gastosData;
@@ -24,12 +23,12 @@ const createGasto = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
         return;
     }
-    const userInDB = yield userModel_1.default.findOne({ name: userModel_1.default });
-    if (!userInDB) {
-        res.json({
-            msj: "Without a user, no expense will be recorded"
-        });
-    }
+    // const userInDB = await User.findOne({name: User})
+    // if(!userInDB) {
+    //     res.json({
+    //         msj: "Without a user, no expense will be recorded"
+    //     })
+    // }
     const gasto = new gastosModel_1.default(gastosData);
     yield gasto.save();
     res.json({

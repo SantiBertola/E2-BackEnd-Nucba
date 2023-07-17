@@ -14,9 +14,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.getUserByDNI = exports.getUsers = exports.createUser = void 0;
 const userModel_1 = __importDefault(require("../models/userModel"));
+const gastosModel_1 = __importDefault(require("../models/gastosModel"));
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userData = req.body;
-    const user = new userModel_1.default(userData);
+    const { name, lastName, dni, gasto } = userData;
+    if (!dni || !name || !lastName || !gasto) {
+        res.json({
+            msj: "Required data is missing from the request",
+        });
+        return;
+    }
+    const gastoData = yield gastosModel_1.default.findOne({ expense: gasto });
+    const userInDB = yield userModel_1.default.findOne({ dni: dni });
+    if (userInDB) {
+        res.json({
+            msj: "This user is already register",
+        });
+    }
+    const user = new userModel_1.default({
+        name,
+        lastName,
+        dni,
+        gasto: gastoData === null || gastoData === void 0 ? void 0 : gastoData._id,
+    });
     yield user.save();
     res.json({
         msj: "User created",
