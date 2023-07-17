@@ -16,6 +16,7 @@ exports.Server = void 0;
 const express_1 = __importDefault(require("express"));
 const config_1 = require("../database/config");
 const userRoutes_1 = __importDefault(require("../routes/userRoutes"));
+const gastosRoutes_1 = __importDefault(require("../routes/gastosRoutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -33,6 +34,7 @@ class Server {
     }
     routes() {
         this.app.use("/users", userRoutes_1.default);
+        this.app.use("/gastos", gastosRoutes_1.default);
     }
     listen() {
         this.app.listen(8080, () => {

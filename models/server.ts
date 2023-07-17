@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import { conexionDB } from "../database/config";
 import userRouter from "../routes/userRoutes";
+import gastosRouter from "../routes/gastosRoutes"
 
 
 export class Server {
@@ -23,6 +24,7 @@ export class Server {
 
     routes():void {
         this.app.use("/users", userRouter)
+        this.app.use("/gastos", gastosRouter)
     }
 
     listen(): void {
@@ -30,10 +32,6 @@ export class Server {
             console.log("Running in port 8080")
         })
     }
-
-
-
-
 }
 
 

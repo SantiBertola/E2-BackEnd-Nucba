@@ -15,17 +15,9 @@ const UserSchema = new mongoose_1.Schema({
         required: true,
         unique: true,
     },
-    // expenses: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Expenses",
-    //   required: true,
-    // },
-    expense: {
-        type: Number,
-        required: true,
-    },
-    detail: {
-        type: String,
+    expenses: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Gastos",
         required: true,
     },
     state: {

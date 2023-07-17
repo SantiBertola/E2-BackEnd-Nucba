@@ -1,11 +1,11 @@
-// import { Router } from "express";
+import { Router } from "express";
 
-// import { createGasto } from "../controllers/gastosController";
+import { createGasto } from "../controllers/gastosController";
 
-// const router = Router()
+const router = Router()
 
-// router.post("/", createGasto)
+router.post("/", createGasto)
 
 
 
-// export default router
+export default router
