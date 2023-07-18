@@ -52,7 +52,7 @@ export const getUsers = async ({}, res: Response) => {
 export const getUserByDNI = async (req: Request, res: Response) => {
   const { dni } = req.params;
 
-  const user: IUser | null = await User.findOne({ dni });
+  const user: IUser | null = await User.findOne({ dni: dni }).populate("gasto", ["expense", "detail"]);
 
   res.json({
     user,

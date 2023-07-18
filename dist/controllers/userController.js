@@ -54,7 +54,7 @@ const getUsers = ({}, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getUsers = getUsers;
 const getUserByDNI = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { dni } = req.params;
-    const user = yield userModel_1.default.findOne({ dni });
+    const user = yield userModel_1.default.findOne({ dni: dni }).populate("gasto", ["expense", "detail"]);
     res.json({
         user,
     });
